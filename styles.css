@@ -1,0 +1,134 @@
+/* ---------------------------------------------------- */
+/* 0. BASE STYLES & RESETS */
+/* ---------------------------------------------------- */
+body {
+    margin: 0;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    background-color: #020304; /* Light green/off-white background */
+    line-height: 1.6;
+}
+
+/* ---------------------------------------------------- */
+/* 1. HEADER & NAVIGATION */
+/* ---------------------------------------------------- */
+.site-header {
+    /* KEY: Makes the header stick to the top */
+    background-color: #020304;
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Ensure it is above all other content */
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 20px;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.navigation ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+
+.navigation ul li {
+    margin-left: 20px;
+}
+
+.navigation ul a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95em;
+    padding: 5px 10px;
+    transition: color 0.3s;
+}
+
+.navigation ul a:hover {
+    color: #fca311; /* Accent color for hover */
+}
+
+.wishlist-section{
+    height: 100vh;
+}
+
+.dashboard{
+    display: flex;
+    height: 100vh;
+
+    color: white;
+
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+
+}
+
+.dashboard h1{
+    font-size:16vh;
+}
+
+.dashboard h3{
+    font-size:4vh;
+}
+
+
+
+#story-parallax{
+
+    overflow: hidden;
+    width: 100%;   
+}
+
+#story-parallax svg{
+    height: 100%;
+    width: 100%;
+    object-position: center;
+    background-color: #020304; /* Light green/off-white background */
+
+}
+
+
+
+/* ---------------------------------------------------- */
+/* 3. FOOTER */
+/* ---------------------------------------------------- */
+.site-footer {
+    background-color: #1a1a1a;
+    color: #999;
+    text-align: center;
+    padding: 20px;
+    font-size: 0.8em;
+}
+
+/* ---------------------------------------------------- */
+/* 4. RESPONSIVENESS (Basic adjustment for mobile view) */
+/* ---------------------------------------------------- */
+@media (max-width: 768px) {
+    .dashboard h1{
+        padding-top: 16vh;
+        position: fixed;
+        font-size:8vh;
+    }
+    .navigation {
+        flex-direction: column;
+        padding-top: 10px;
+    }
+    .navigation ul {
+        margin-top: 10px;
+    }
+    .navigation ul li {
+        margin: 0 10px;
+    }
+}
