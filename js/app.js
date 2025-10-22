@@ -15,11 +15,13 @@ loadSVG()
 
 function setAnimationScroll(){
     gsap.registerPlugin(ScrollTrigger);
+
     let runAnimation = gsap.timeline({
         scrollTrigger:{
             trigger: "#story-parallax",
-            start: "top top",
-            end: "+=2000",
+            start: "top",
+            end: "bottom",
+            markers:true,
             scrub: true,
             pin:true,
         }

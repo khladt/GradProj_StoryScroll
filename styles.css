@@ -8,6 +8,11 @@ body {
     line-height: 1.6;
 }
 
+img{
+    max-width: 100%;
+    height: auto;
+}
+
 /* ---------------------------------------------------- */
 /* 1. HEADER & NAVIGATION */
 /* ---------------------------------------------------- */
@@ -60,8 +65,14 @@ body {
 }
 
 .wishlist-section{
+    display: flex;
     height: 100vh;
+    color: white;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
 }
+
 
 .dashboard{
     display: flex;
@@ -75,14 +86,10 @@ body {
 
 }
 
-.dashboard h1{
-    font-size:16vh;
-}
 
 .dashboard h3{
     font-size:4vh;
 }
-
 
 
 #story-parallax{
@@ -100,6 +107,39 @@ body {
 }
 
 
+.cta-button{
+    background-color: transparent;
+    border: 0;
+    
+    text-align: center;
+    height: 16vh;
+    width:25vh;
+
+    cursor: pointer;
+    
+    background-image: url('img/Button_UI_NORMAL.webp');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: all 0.2s ease-in-out;
+}
+
+.cta-button:hover{
+    background-color: transparent;
+    border: 0;
+    
+    text-align: center;
+    height: 16vh;
+    width:32vh;
+
+
+    cursor: pointer;
+    
+    background-image: url('img/Button_UI_SELECTED.webp');
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
 /* ---------------------------------------------------- */
 /* 3. FOOTER */
