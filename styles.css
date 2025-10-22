@@ -92,27 +92,8 @@ img{
 }
 
 
-
-.dialogueBox{
-    display: flex;
-    height: fit-content;
-    gap: 4vh;
-    width: content;
-    padding: 8px;
-    object-position: center;
-    background-color: black;
-    border: 3px solid #020304;
-    border-radius: 5vh;
-}
-
-.dialogueBox img{
-    width: 8vh;
-    height: 8vh;
-    border: 1px solid white;
-    background-color: black;
-}
-
 #story-parallax{
+
     overflow: hidden;
     width: 100%;   
 }
