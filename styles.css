@@ -139,24 +139,23 @@ img{
 .dialogue-box {
     position: fixed;
     bottom: 0;
-    width: 25vw;
-    min-height: 5vw;
+    max-width:26vw;
+    min-height: 0vh;
     z-index: 1000;
     
     background-color: #000000;
     border: 3px solid #565555;
     box-shadow: 32px 28px 32px rgba(0, 0, 0, 1.8);
     border-radius: 74px;
-    
     display: flex;
     align-items: center;
+    padding-right: 0.9vw;
 }
 
 .profile-image {
-    position: relative;
-    width: 7vW;
+    position: absolute;
+    width: 6vW;
     height: auto;
-    min-height: 4.9vw;
     aspect-ratio: 1 / 1;
 
     flex-shrink: 0;
@@ -168,6 +167,7 @@ img{
 .profile-image img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
     display: block;
     position: absolute; 
@@ -175,13 +175,13 @@ img{
 }
 
 .dialogue-content {
+    padding-left: 7vw;
     flex-grow: 1;
-    padding-left: 15px;
     color: white;
 }
 
 .character-name {
-    font-size: 1.3vw;
+    font-size: 1.1vw;
     font-weight: bold;
     color: #ffd700;
     margin-bottom: 0.5vh;
@@ -191,16 +191,53 @@ img{
 .dialogue-text {
     margin: 0;
     font-family: monospace, sans-serif;
-    font-size: 1.1vw;
+    font-size: 1.0vw;
     line-height: 2.5vh;
     margin-bottom: 2vh;
 }
 
 
+.Quinn{
+    position: relative;
+    z-index: 1;
+    background-image: url('img/Quinn/Quinn_Walking-s4.webp');
+    background-repeat: no-repeat;
+    width: 11%;
+    height: 20%;
+    left: 37%;
+    top: 20%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: 30%;
+    will-change: opacity,transform;
+
+}
+
+.Quinn.a{background-position: -3%;}
+.Quinn.b{background-position: 30%;}
+.Quinn.c{background-position: 65%;}
+.Quinn.d{background-position: 100%;}
+
+.Quinn-lantern{
+    position: absolute;
+    z-index: -2;
+    width: 76%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    left: 0%;
+    top: 0%;
+    background-size:contain;
+    background-repeat: no-repeat;
+    background-image: url('img/Quinn/quinn-wc-light-2-4.webp');
+    will-change: opacity,transform;
+}
+.Quinn-lantern.a,.Quinn-lantern.c{background-image: url('img/Quinn/quinn-wc-light-1-3.webp');}
+.Quinn-lantern.b,.Quinn-lantern.d{background-image: url('img/Quinn/quinn-wc-light-2-4.webp');}
+
 
 .Seven{
     position: relative;
-    background-image: url('img/Seven/sss.png');
+    background-image: url('img/Seven/sss-s1.png');
     background-repeat: no-repeat;
     width: 15%;
     height: auto;
@@ -269,6 +306,16 @@ img{
 #S1-TOWER{
     width: 20%;
     left: 41%;
+
+}
+
+#S3-LS{
+    top: 14.5%;
+    left: 47.5%;
+}
+
+#S4-FG{
+    z-index: -2;
 }
 
   /* ========================================== */
@@ -549,23 +596,23 @@ img{
 .dialogue-box {
     position: fixed;
     bottom: 0;
-    width: 80vw;
-    min-height: 8vw;
+    max-width:69vw;
+    min-height: 9vh;
     z-index: 1000;
     
     background-color: #000000;
     border: 3px solid #565555;
     box-shadow: 32px 28px 32px rgba(0, 0, 0, 1.8);
     border-radius: 74px;
-    
     display: flex;
     align-items: center;
+    padding-right: 0.9vw;
 }
 
 .profile-image {
-    width: 15vW;
+    position: absolute;
+    width: 20vW;
     height: auto;
-    min-height: 2.9vw;
     aspect-ratio: 1 / 1;
 
     flex-shrink: 0;
@@ -577,29 +624,30 @@ img{
 .profile-image img {
     width: 100%;
     height: 100%;
+
     object-fit: cover;
     display: block;
+    position: absolute; 
+    opacity: 0; 
 }
 
 .dialogue-content {
+    padding-left: 23vw;
     flex-grow: 1;
-    padding-left: 15px;
     color: white;
 }
 
 .character-name {
-    font-size: 4.3vw;
+    font-size: 4.1vw;
     font-weight: bold;
     color: #ffd700;
-    margin-bottom: 0.5vh;
     text-transform: uppercase;
 }
 
 .dialogue-text {
     font-family: monospace, sans-serif;
-    font-size: 4vw;
-    line-height: 2.2vh;
-    margin-bottom: 2vh;
+    font-size: 4.0vw;
+    line-height: 2.5vh;
 }
 
 

@@ -66,7 +66,8 @@ function handleResizeOrRotate() {
 function initGSAP() {
     lockScroll(); 
     
-    gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+    gsap.registerPlugin(Draggable,DrawSVGPlugin,ScrollTrigger,ScrollSmoother,TextPlugin,RoughEase,ExpoScaleEase,SlowMo,CustomEase,CustomBounce,CustomWiggle)
+
     
     const parallaxImages = document.querySelectorAll('#story-parallax img');
     
@@ -126,7 +127,7 @@ function startDesktopGSAP() {
         scrollTrigger: {
             trigger: "#story-parallax",
             start: "top top",
-            end: () => "+=" + 45 * window.innerHeight,            
+            end: () => "+=" + 80 * window.innerHeight,            
             scrub: 1, 
             pin: true,
             anticipatePin: 1,
@@ -143,7 +144,7 @@ function startDesktopGSAP() {
     .to('.character-name', {text: "SEVEN", duration: 5 },"<")
     .to('#chara-quinn',{opacity:0,duration:1},"<")
     .to('#chara-seven',{opacity:1,duration:1},"<")
-    .call(changeSequence, ['is-front'])
+    .call(SevenchangeSequence, ['is-front'])
     .to('.dialogue-text',{text: "Quinnny-Que. KWEEEEEEN.", duration: 9 },"<")
 
 
@@ -167,8 +168,8 @@ function startDesktopGSAP() {
         {x: "400%" ,y: "1000%"}, {y: "50%", duration: 24}, "<")    
 
     .fromTo('.Seven', 
-        {filter: "brightness(0%) hue-rotate(40deg)"}, 
-        {filter: "brightness(90%) hue-rotate(340deg) saturate(70%) grayscale(30%)", duration: 16 }, "<+=5") 
+        {filter: "brightness(0%)"}, 
+        {filter: "brightness(100%) saturate(70%) grayscale(30%)", duration: 16 }, "<+=10") 
 
 
     .to('.dialogue-box',{x:"55vw",y:"-40vh" ,scale: 1, duration: 2 },"<+=10")
@@ -176,7 +177,7 @@ function startDesktopGSAP() {
     .to('#chara-quinn',{opacity:0,duration:1},"<")
     .to('#chara-seven',{opacity:1,duration:1},"<")
 
-    .call(changeSequence, ['is-front-wave'])
+    .call(SevenchangeSequence, ['is-front-wave'])
     .to('.dialogue-text',{text: "All clear QUIINNNN!", duration: 9 },"<")
 
     .to('.dialogue-box',{x:"25vw",y:"-30vh" ,scale: 1, duration: 9 },"+=5")
@@ -228,6 +229,8 @@ function startDesktopGSAP() {
 .fromTo('#S2-BG', {opacity:0.0,y:"30%"}, {opacity:1.0, y:"-30%", duration: 21 },"<")
 .fromTo('#S2-LW', {scale:0.9,opacity:0.0, x:"50vw" ,y:"-315%"}, {opacity:1.0,y:"0%", duration: 20.5 },"<")
 
+
+//Scene 2 Ending
 .to('#S2-FG', {y:"-100%", duration: 25 })
 .to('#S2-L0', {y:"-100%", duration: 23 },"<")
 .to('#S2-L1', {y:"-100%", duration: 22 },"<")
@@ -236,8 +239,8 @@ function startDesktopGSAP() {
 .to('#S2-LW', {opacity:0.3,y:"100%", duration: 40 },"<")
 
 
-//SCENE 3 (with S2-LW) ANIMATION SECTION
 
+//SCENE 3 (with S2-LW) ANIMATION SECTION
 .fromTo('#S3-L0', {opacity:0.0}, {opacity:1.0,y:"-10%", duration: 1 },"<")
 .fromTo('#S3-BG', {opacity:0.0,y:"0%"}, {opacity:1.0,y:"0%", duration: 20 },"<")
 .call(() => blinkingTimeline.play(), [], "<")
@@ -246,39 +249,437 @@ function startDesktopGSAP() {
 .to('#chara-quinn', {opacity:0,duration:1},"<")
 .to('#chara-seven', {opacity:1,duration:1},"<")
 
-.fromTo('#S3-LE-0', {scale: 1.2,y:"-60%"}, {y:"-10%", duration: 30 },">")
-.fromTo('#S3-LE-1', {scale: 1.2,opacity:0.0,y:"-60%"}, {y:"-10%", duration: 30 },"<")
+.fromTo('#S3-LE-0', {scale: 0.6,y:"-120%",x:"5%"}, {y:"-30%", duration: 30 },">")
+.fromTo('#S3-LE-1', {scale: 0.6,opacity:0.0,y:"-120%",x:"5%"}, {y:"-30%", duration: 30 },"<")
 
-.to('.dialogue-text', {text: "🎶 Take oOOOOn me (TAKE ON ME) Take mEEEeeEe on (TAKE ON ME) 🎶", duration: 20 },"<")
-.to('.dialogue-text', {text: "🎶 I'LL BEEE GOOONE, IN A DAY OR TWOOOOOOOOOOOOOOOO 🎶", duration: 20 },">+=10")
+.fromTo('.dialogue-text',{text:""} ,{text: "🎶 Take oOOOOn me (TAKE ON ME) Take mEEEeeEe on (TAKE ON ME) 🎶", duration: 20 },"<")
+.fromTo('.dialogue-text',{text:""} ,{text: "🎶 I'LL BEEE GOOONE, IN A DAY OR TWOOOOOOOOOOOOOOOO 🎶", duration: 20 },">+=5")
+.to('.dialogue-box', {x:"15vw",y:"-70vh" ,scale: 1, duration: 2 },"<")
 
 .to('#S3-BG', {y:"-20%" ,duration: 30 },"<")
 .to('#S3-L0', {y:"-30%",duration: 30 },"<")
 
 
 .to('#S2-LW', {opacity:0.5,y:"10%",duration: 5},"<+20")
-.to('#S3-LE-0', {y:"-60%",duration: 8 },"<")
-.to('#S3-LE-1', {y:"-60%",duration: 8 },"<")
-.fromTo('#S3-FG-0', {y:"200%"}, {y:"45%", duration: 10 },"<")
-.fromTo('#S3-FG-1', {y:"200%"}, {y:"20%", duration: 12 },"<")
-.to('#S2-LW', {scaleY:0.0, opacity:0.0,y:"-5%",duration: 5},"<+=10")
-.to('#S3-BG', {y:"-30%" ,duration: 8 },"<")
-.to('#S3-L0', {y:"-50%",duration: 8 },"<")
-
 
 .to('.dialogue-box', {x:"55vw",y:"-40vh" ,scale: 0, duration: 2 },"<")
 .to('.dialogue-text', {text: "", duration: 10 },"<")
+
+.to('#S3-LE-0', {y:"-75%",duration: 8 },"<")
+.to('#S3-LE-1', {y:"-75%",duration: 8 },"<")
+.fromTo('#S3-FG-0', {y:"200%"}, {y:"45%", duration: 10 },"<")
+.fromTo('#S3-FG-1', {y:"200%"}, {y:"20%", duration: 12 },"<")
+.to('#S2-LW', {scaleY:0.0, opacity:0.0,y:"-5%",duration: 2},"<+=10")
+.to('#S3-BG', {y:"-30%" ,duration: 8 },"<")
+.to('#S3-L0', {y:"-50%",duration: 8 },"<")
+.fromTo('#S3-LS',{opacity:0.0},{opacity:1.0,duration:5},'<')
+
+
+
 .call(() => blinkingTimeline.paused(), [], "<")
 
 .to('.dialogue-box', {x:"55vw",y:"-40vh" ,scale: 0, duration: 2 },">")
 
 
+//Scene 3 Ending
 .to('#S3-FG-0', {y:"-30%", duration: 16 })
 .to('#S3-FG-1', {y:"-50%", duration: 13 },"<")
 .to('#S3-L0', {y:"-100%", duration: 16 },"<")
-.to('#S3-LE-0', {y:"-50%", duration: 16 },"<")
-.to('#S3-LE-1', {y:"-50%", duration: 16 },"<")
+.to('#S3-LE-0', {y:"-125%", duration: 16 },"<")
+.to('#S3-LE-1', {y:"-125%", duration: 16 },"<")
 .to('#S3-BG', {y:"-100%", duration: 16 },"<")
+
+
+
+//SCENE 2 ANIMATION SECTION
+.fromTo('#S2-FG', {y:"250%"}, {y:"-40%", duration: 21 })
+.fromTo('#S2-L0', {y:"200%"}, {y:"-30%", duration: 13 },"<")
+.fromTo('#S2-L1', {y:"150%"}, {y:"-15%", duration: 11 },"<")
+.fromTo('#S2-L2', {y:"100%"}, {y:"-5%", duration: 10 },"<")
+.fromTo('#S2-BG', {opacity:0.0,y:"30%"}, {opacity:1.0, y:"-30%", duration: 21 },"<")
+
+
+//Scene 2 Ending
+.to('#S2-FG', {y:"-90%", duration: 25 })
+.to('#S2-L0', {y:"-72%", duration: 23 },"<")
+.to('#S2-L1', {y:"-73%", duration: 22 },"<")
+.to('#S2-L2', {y:"-75%", duration: 21 },"<")
+.to('#S2-BG', {opacity:0.0,y:"-60%", duration: 20 },"<")
+
+//Scene 4 Ending
+
+.fromTo('#S4-FG',{scale:1.3,y:'100%',x:'15%'},{y:'15%',duration: 15},'<')
+
+
+.fromTo('.Quinn-lantern',{y:'10%',x:'-80%', opacity:0.0},{x:'-75%',opacity:1.0,duration: 2})
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{opacity: 1.0,x:'-60%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'-55%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'-50%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+.to('.Quinn-lantern',{x:'-45%',duration: 2},)
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'-40%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'-35%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'-30%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+.to('.Quinn-lantern',{x:'-25%',duration: 2},)
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'-20%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'-15%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'-10%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+.to('.Quinn-lantern',{x:'-5%',duration: 2},)
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'0%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'5%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'10%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+.to('#S4-FG',{x:'10%',duration: 2})
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('#S4-FG',{x:'5%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('#S4-FG',{x:'0%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('#S4-FG',{x:'-5%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+.to('#S4-FG',{x:'-10%',duration: 2})
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('#S4-FG',{x:'-15%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'15%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'20%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+.to('.Quinn-lantern',{x:'25%',duration: 2})
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'30%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'35%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'40%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+.to('.Quinn-lantern',{x:'45%',duration: 2},)
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'50%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'55%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'60%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+.to('.Quinn-lantern',{x:'65%',duration: 2},)
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'70%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'75%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'80%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+.to('.Quinn-lantern',{x:'85%',duration: 2},)
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'90%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'95%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'100%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+.to('#S4-FG',{y:'-100%',duration: 25})
+.to('#S2-FG', {y:"-100%", duration: 15 },"<")
+.to('#S2-L0', {y:"-100%", duration: 13 },"<")
+.to('#S2-L1', {y:"-100%", duration: 12 },"<")
+.to('#S2-L2', {y:"-100%", duration: 11 },"<")
+.to('#S2-BG', {opacity:0.0,y:"-100%", duration: 10 },"<")
+
+
+
+.fromTo('#S4-FG',{scale:1.3,y:'100%',x:'15%'},{y:'15%',duration: 15},'>')
+
+
+.fromTo('.Quinn-lantern',{y:'10%',x:'-80%', opacity:0.0},{x:'-75%',opacity:1.0,duration: 2})
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{opacity: 1.0,x:'-60%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'-55%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'-50%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+.to('.Quinn-lantern',{x:'-45%',duration: 2},)
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'-40%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'-35%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'-30%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+.to('.Quinn-lantern',{x:'-25%',duration: 2},)
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'-20%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'-15%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'-10%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+.to('.Quinn-lantern',{x:'-5%',duration: 2},)
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'0%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'5%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'10%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+.to('#S4-FG',{x:'10%',duration: 2})
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('#S4-FG',{x:'5%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('#S4-FG',{x:'0%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('#S4-FG',{x:'-5%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+.to('#S4-FG',{x:'-10%',duration: 2})
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('#S4-FG',{x:'-15%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'15%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'20%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+.to('.Quinn-lantern',{x:'25%',duration: 2})
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'30%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'35%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'40%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+.to('.Quinn-lantern',{x:'45%',duration: 2},)
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'50%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'55%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'60%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+.to('.Quinn-lantern',{x:'65%',duration: 2},)
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'70%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'75%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'80%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+.to('.Quinn-lantern',{x:'85%',duration: 2},)
+.set('.Quinn',{className: 'Quinn a'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern a'},'<')
+
+.to('.Quinn-lantern',{x:'90%',duration: 5})
+.set('.Quinn',{className: 'Quinn b'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern b'},'<')
+
+.to('.Quinn-lantern',{x:'95%',duration: 2})
+.set('.Quinn',{className: 'Quinn c'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern c'},'<')
+
+.to('.Quinn-lantern',{x:'100%',duration: 5})
+.set('.Quinn',{className: 'Quinn d'},'<')
+.set('.Quinn-lantern',{className: 'Quinn-lantern d'},'<')
+
+
+
+
+
+
+
 
 
 
@@ -288,6 +689,7 @@ function startDesktopGSAP() {
     //All scene Ending
     .to('.site-header',{opacity: 1, duration: 4 },"<")
 };
+
 
 
 
@@ -353,8 +755,8 @@ function startMobileGSAP() {
     .to('#chara-quinn',{opacity:0,duration:1},"<")
     .to('#chara-seven',{opacity:1,duration:1},"<")
 
-    .call(changeSequence, ['is-front'])
-    .call(changeSequence, ['is-front-wave'])
+    .call(SevenchangeSequence, ['is-front'])
+    .call(SevenchangeSequence, ['is-front-wave'])
     .to('.dialogue-text',{text: "All clear QUIINNNN!", duration: 2 },"<")
 
     .to('.dialogue-box',{x:"2vw",y:"-30vh" ,scale: 1, duration: 2 },"+=5")
@@ -401,13 +803,12 @@ function startMobileGSAP() {
 
 //Seven Animations Functions ------------------------------------------------------
 const sevenElement = document.querySelector('.Seven');
-changeSequence('is-front') //Initiate Seven Default Animation
-function changeSequence(newClass) {
+SevenchangeSequence('is-front') //Initiate Seven Default Animation
+function SevenchangeSequence(newClass) {
     sevenElement.className = sevenElement.className.replace(/\bis-\w*\b/g, ''); 
     sevenElement.classList.add(newClass);
 }
 //---------------------------------------------------------------------------------
-
 
 
 //Fullscreen Functions ------------------------------------------------------
